@@ -249,16 +249,16 @@ int main()
 			printf("사용하신 폭탄의 개수는 %d 입니다.", BombUsingCnt);
 			break;
 		}
-		printf("t : 폭탄 설치, u : 폭탄 터뜨리기\n");
+		printf("b : 폭탄 설치, f : 폭탄 터뜨리기\n");
 		printf("w : 위, s : 아래, a : 왼쪽, d : 오른쪽, q : 종료");
 		char cinput = _getch(); //키보드 입력시 바로 반응
 		if (cinput == 'q' || cinput == 'Q')
 			break;
-		else if (cinput == 't' || cinput == 'T')
+		else if (cinput == 'b' || cinput == 'B')
 		{
 			CreateBomb(strMaze, &PlayerPos, BombPos, &BombCnt, &BombUsingCnt);
 		}
-		else if (cinput == 'u' || cinput == 'U')
+		else if (cinput == 'f' || cinput == 'F')
 		{
 			Fire(strMaze, &PlayerPos, BombPos, &BombCnt);
 		}
