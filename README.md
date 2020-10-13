@@ -24,5 +24,16 @@ C-language
 - 플레이어가 도착점에 도착하면 사용한 폭탄의 개수와 도착 알림 출력하기
 
 
+1) 폭탄 미로 게임 시작 화면
+![게임시작화면](https://user-images.githubusercontent.com/31584255/95892398-748a4500-0dc1-11eb-84f5-ab955ac7a8ce.png)
+
+2) 폭탄 설치 화면
+![폭탄 설치](https://user-images.githubusercontent.com/31584255/95892453-8b309c00-0dc1-11eb-8952-357f11c27328.png)
+
+3) 폭탄 터뜨리기
+![폭탄 터뜨리기](https://user-images.githubusercontent.com/31584255/95892482-984d8b00-0dc1-11eb-8080-b4d7f0562450.png)
+
+4) 도착 화면
+![도착 화면](https://user-images.githubusercontent.com/31584255/95892508-a0a5c600-0dc1-11eb-84af-f0075ceaea61.png)
 
 
