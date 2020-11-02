@@ -4,7 +4,7 @@
 #include<windows.h>
 
 /*
-0: º®, 1: ±æ, 2: ½ÃÀÛÁ¡, 3: µµÂøÁ¡, 4: ÆøÅº
+0: ë²½, 1: ê¸¸, 2: ì‹œì‘ì , 3: ë„ì°©ì , 4: í­íƒ„
 */
 typedef struct _tagPoint
 {
@@ -21,7 +21,7 @@ void SetMaze(char Maze[21][21], _tagPPoint PlayerPos, _tagPPoint pStartPos, _tag
 	pEndPos->x = 19;
 	pEndPos->y = 19;
 
-	*PlayerPos = *pStartPos; //½ÃÀÛÁ¡¿¡¼­ ÇÃ·¹ÀÌ¾î ½ÃÀÛ
+	*PlayerPos = *pStartPos; //ì‹œì‘ì ì—ì„œ í”Œë ˆì´ì–´ ì‹œì‘
 
 	strcpy_s(Maze[0], 21, "21100000000000000000");
 	strcpy_s(Maze[1], 21, "00111111111110000000");
@@ -51,28 +51,28 @@ void Output(char Maze[21][21], _tagPPoint PlayerPos)
 	{
 		for (int j = 0; j < 21; ++j)
 		{
-			if (Maze[i][j] == '4')//ÆøÅº
-				printf("¡Ø");
-			else if (PlayerPos->x == j && PlayerPos->y == i) //ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡
+			if (Maze[i][j] == '4')//í­íƒ„
+				printf("â€»");
+			else if (PlayerPos->x == j && PlayerPos->y == i) //í”Œë ˆì´ì–´ì˜ ìœ„ì¹˜
 			{
-				printf("¡Ù");
+				printf("â˜†");
 			}
-			else if (Maze[i][j] == '0')//º®
+			else if (Maze[i][j] == '0')//ë²½
 			{
-				printf("¡á");
+				printf("â– ");
 			}
-			else if (Maze[i][j] == '1')//±æ
+			else if (Maze[i][j] == '1')//ê¸¸
 			{
 				printf("  ");
 
 			}
-			else if (Maze[i][j] == '2')//½ÃÀÛÁ¡
+			else if (Maze[i][j] == '2')//ì‹œì‘ì 
 			{
-				printf("¡Ú");
+				printf("â˜…");
 			}
-			else if (Maze[i][j] == '3')//µµÂøÁ¡
+			else if (Maze[i][j] == '3')//ë„ì°©ì 
 			{
-				printf("¢¾");
+				printf("â™¥");
 			}
 
 		}printf("\n");
@@ -81,9 +81,9 @@ void Output(char Maze[21][21], _tagPPoint PlayerPos)
 
 void MoveUp(char Maze[21][21], _tagPPoint PlayerPos)
 {
-	if (PlayerPos->y - 1 >= 0)//À§·Î ÀÌµ¿ °¡´ÉÇÑ °æ¿ì
+	if (PlayerPos->y - 1 >= 0)//ìœ„ë¡œ ì´ë™ ê°€ëŠ¥í•œ ê²½ìš°
 	{
-		//º®, ÆøÅºÀÎÁö È®ÀÎ
+		//ë²½, í­íƒ„ì¸ì§€ í™•ì¸
 		if (Maze[PlayerPos->y - 1][PlayerPos->x] != '0' &&
 			Maze[PlayerPos->y - 1][PlayerPos->x] != '4')
 		{
@@ -93,9 +93,9 @@ void MoveUp(char Maze[21][21], _tagPPoint PlayerPos)
 }
 void MoveDown(char Maze[21][21], _tagPPoint PlayerPos)
 {
-	if (PlayerPos->y + 1 < 21)//¾Æ·¡·Î ÀÌµ¿ °¡´ÉÇÑ ¹üÀ§
+	if (PlayerPos->y + 1 < 21)//ì•„ë˜ë¡œ ì´ë™ ê°€ëŠ¥í•œ ë²”ìœ„
 	{
-		//º®, ÆøÅºÀÎÁö È®ÀÎ
+		//ë²½, í­íƒ„ì¸ì§€ í™•ì¸
 		if (Maze[PlayerPos->y + 1][PlayerPos->x] != '0' &&
 			Maze[PlayerPos->y + 1][PlayerPos->x] != '4')
 		{
@@ -105,9 +105,9 @@ void MoveDown(char Maze[21][21], _tagPPoint PlayerPos)
 }
 void MoveRight(char Maze[21][21], _tagPPoint PlayerPos)
 {
-	if (PlayerPos->x + 1 < 21)//¿À¸¥ÂÊÀ¸·Î ÀÌµ¿ °¡´ÉÇÑ °æ¿ì
+	if (PlayerPos->x + 1 < 21)//ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™ ê°€ëŠ¥í•œ ê²½ìš°
 	{
-		//º®, ÆøÅºÀÎÁö È®ÀÎ
+		//ë²½, í­íƒ„ì¸ì§€ í™•ì¸
 		if (Maze[PlayerPos->y][PlayerPos->x + 1] != '0' &&
 			Maze[PlayerPos->y][PlayerPos->x + 1] != '4')
 		{
@@ -119,7 +119,7 @@ void MoveLeft(char Maze[21][21], _tagPPoint PlayerPos)
 {
 	if (PlayerPos->x - 1 < 21)
 	{
-		//º®, ÆøÅºÀÎÁö È®ÀÎ
+		//ë²½, í­íƒ„ì¸ì§€ í™•ì¸
 		if (Maze[PlayerPos->y][PlayerPos->x - 1] != '0' &&
 			Maze[PlayerPos->y][PlayerPos->x - 1] != '4')
 		{
@@ -153,15 +153,15 @@ void MovePlayer(char Maze[21][21], _tagPPoint PlayerPos, char cintput)
 
 void CreateBomb(char Maze[21][21], const _tagPPoint Player, _tagPPoint BombArr, int* BombCnt, int* BombUsingCnt)
 {
-	if (*BombCnt == 5) //ÃÖ´ë ´Ù¼¸°³±îÁö ÆøÅº ¼³Ä¡ °¡´É
+	if (*BombCnt == 5) //ìµœëŒ€ ë‹¤ì„¯ê°œê¹Œì§€ í­íƒ„ ì„¤ì¹˜ ê°€ëŠ¥
 		return;
 
-	for (int i = 0; i < *BombCnt; ++i) //Áßº¹À§Ä¡¿¡ ¼³Ä¡ ºÒ°¡´É
+	for (int i = 0; i < *BombCnt; ++i) //ì¤‘ë³µìœ„ì¹˜ì— ì„¤ì¹˜ ë¶ˆê°€ëŠ¥
 	{
 		if (Player->x == BombArr[i].x && Player->y == BombArr[i].y)
 			return;
 	}
-	BombArr[*BombCnt] = *Player; //¼³Ä¡ÇÑ ÆøÅºÀÇ À§Ä¡¸¦ ¹è¿­·Î ÀúÀå
+	BombArr[*BombCnt] = *Player; //ì„¤ì¹˜í•œ í­íƒ„ì˜ ìœ„ì¹˜ë¥¼ ë°°ì—´ë¡œ ì €ì¥
 	++(*BombCnt);
 
 	Maze[Player->y][Player->x] = '4';
@@ -172,15 +172,15 @@ void Fire(char Maze[21][21], _tagPPoint Player, _tagPPoint BombArr, int* BombCnt
 {
 	for (int i = 0; i < *BombCnt; ++i)
 	{
-		//ÅÍ¶ß¸° ÆøÅºÀº ¾ø¾îÁü
+		//í„°ëœ¨ë¦° í­íƒ„ì€ ì—†ì–´ì§
 		Maze[BombArr[i].y][BombArr[i].x] = '1';
 
 		if (BombArr[i].y + 1 < 20)
 		{
-			if (Maze[BombArr[i].y + 1][BombArr[i].x] == '0')//À§ÀÇ º®ÀÌ ±úÁü
+			if (Maze[BombArr[i].y + 1][BombArr[i].x] == '0')//ìœ„ì˜ ë²½ì´ ê¹¨ì§
 				Maze[BombArr[i].y + 1][BombArr[i].x] = '1';
 
-			//ÇÃ·¹ÀÌ¾î°¡ ÆøÅº¿¡ ¸ÂÀ¸¸é ½ÃÀÛÁ¡À¸·Î µ¹¾Æ°¨
+			//í”Œë ˆì´ì–´ê°€ í­íƒ„ì— ë§ìœ¼ë©´ ì‹œì‘ì ìœ¼ë¡œ ëŒì•„ê°
 			if (Player->x == BombArr[i].x && Player->y == BombArr[i].y + 1)
 			{
 				Player->x = 0;
@@ -189,7 +189,7 @@ void Fire(char Maze[21][21], _tagPPoint Player, _tagPPoint BombArr, int* BombCnt
 		}
 		if (BombArr[i].y - 1 < 20)
 		{
-			if (Maze[BombArr[i].y - 1][BombArr[i].x] == '0')//¾Æ·¡ º®ÀÌ ±úÁü
+			if (Maze[BombArr[i].y - 1][BombArr[i].x] == '0')//ì•„ë˜ ë²½ì´ ê¹¨ì§
 				Maze[BombArr[i].y - 1][BombArr[i].x] = '1';
 
 			if (Player->x == BombArr[i].x && Player->y == BombArr[i].y - 1)
@@ -200,7 +200,7 @@ void Fire(char Maze[21][21], _tagPPoint Player, _tagPPoint BombArr, int* BombCnt
 		}
 		if (BombArr[i].x - 1 >= 0)
 		{
-			if (Maze[BombArr[i].y][BombArr[i].x - 1] == '0')//¿ŞÂÊ º®ÀÌ ±úÁü
+			if (Maze[BombArr[i].y][BombArr[i].x - 1] == '0')//ì™¼ìª½ ë²½ì´ ê¹¨ì§
 				Maze[BombArr[i].y][BombArr[i].x - 1] = '1';
 
 			if (Player->x == BombArr[i].x - 1 && Player->y == BombArr[i].y)
@@ -211,7 +211,7 @@ void Fire(char Maze[21][21], _tagPPoint Player, _tagPPoint BombArr, int* BombCnt
 		}
 		if (BombArr[i].x + 1 < 20)
 		{
-			if (Maze[BombArr[i].y][BombArr[i].x + 1] == '0')//¿À¸¥ÂÊ º®ÀÌ ±úÁü
+			if (Maze[BombArr[i].y][BombArr[i].x + 1] == '0')//ì˜¤ë¥¸ìª½ ë²½ì´ ê¹¨ì§
 				Maze[BombArr[i].y][BombArr[i].x + 1] = '1';
 			if (Player->x == BombArr[i].x + 1 && Player->y == BombArr[i].y)
 			{
@@ -240,18 +240,18 @@ int main()
 	while (1)
 	{
 		system("cls");
-		//¹Ì·Î Ãâ·Â
+		//ë¯¸ë¡œ ì¶œë ¥
 		Output(strMaze, &PlayerPos);
 
 		if (PlayerPos.x == EndPos.x && PlayerPos.y == EndPos.y)
 		{
-			printf("µµÂøÇß½À´Ï´Ù\n");
-			printf("»ç¿ëÇÏ½Å ÆøÅºÀÇ °³¼ö´Â %d ÀÔ´Ï´Ù.", BombUsingCnt);
+			printf("ë„ì°©í–ˆìŠµë‹ˆë‹¤\n");
+			printf("ì‚¬ìš©í•˜ì‹  í­íƒ„ì˜ ê°œìˆ˜ëŠ” %d ì…ë‹ˆë‹¤.", BombUsingCnt);
 			break;
 		}
-		printf("b : ÆøÅº ¼³Ä¡, f : ÆøÅº ÅÍ¶ß¸®±â\n");
-		printf("w : À§, s : ¾Æ·¡, a : ¿ŞÂÊ, d : ¿À¸¥ÂÊ, q : Á¾·á");
-		char cinput = _getch(); //Å°º¸µå ÀÔ·Â½Ã ¹Ù·Î ¹İÀÀ
+		printf("b : í­íƒ„ ì„¤ì¹˜, f : í­íƒ„ í„°ëœ¨ë¦¬ê¸°\n");
+		printf("w : ìœ„, s : ì•„ë˜, a : ì™¼ìª½, d : ì˜¤ë¥¸ìª½, q : ì¢…ë£Œ");
+		char cinput = _getch(); //í‚¤ë³´ë“œ ì…ë ¥ì‹œ ë°”ë¡œ ë°˜ì‘
 		if (cinput == 'q' || cinput == 'Q')
 			break;
 		else if (cinput == 'b' || cinput == 'B')
