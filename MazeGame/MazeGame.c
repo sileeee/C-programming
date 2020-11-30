@@ -12,7 +12,7 @@ typedef struct _tagPoint
 	int x;
 	int y;
 
-} _tagPoint, * _tagPPoint
+} _tagPoint, * _tagPPoint;
 
 void SetMaze(char Maze[21][21], _tagPPoint PlayerPos, _tagPPoint pStartPos, _tagPPoint pEndPos)
 {
@@ -22,9 +22,9 @@ void SetMaze(char Maze[21][21], _tagPPoint PlayerPos, _tagPPoint pStartPos, _tag
 	pEndPos->x = 19;
 	pEndPos->y = 19;
 
-	*PlayerPos = *pStartPos //시작점에서플레이어시작
+	*PlayerPos = *pStartPos; //시작점에서 플레이어 시작
 
-		strcpy_s(Maze[0], 21, "21100000000000000000");
+	strcpy_s(Maze[0], 21, "21100000000000000000");
 	strcpy_s(Maze[1], 21, "00111111111110000000");
 	strcpy_s(Maze[2], 21, "00100000000011111100");
 	strcpy_s(Maze[3], 21, "11111111000000000100");
@@ -54,7 +54,7 @@ void Output(char Maze[21][21], _tagPPoint PlayerPos)
 		{
 			if (Maze[i][j] == '4')//폭탄
 				printf("※");
-			else if (PlayerPos->x == j && PlayerPos->y == i) //플레이어의위치
+			else if (PlayerPos->x == j && PlayerPos->y == i) //플레이어의 위치
 			{
 				printf("☆");
 			}
@@ -82,9 +82,9 @@ void Output(char Maze[21][21], _tagPPoint PlayerPos)
 
 void MoveUp(char Maze[21][21], _tagPPoint PlayerPos)
 {
-	if (PlayerPos->y - 1 >= 0)//위로이동가능한경우
+	if (PlayerPos->y - 1 >= 0)//위로 이동 가능한 경우
 	{
-		//벽, 폭탄인지확인
+		//벽, 폭탄인지 확인
 		if (Maze[PlayerPos->y - 1][PlayerPos->x] != '0' &&
 			Maze[PlayerPos->y - 1][PlayerPos->x] != '4')
 		{
@@ -94,9 +94,9 @@ void MoveUp(char Maze[21][21], _tagPPoint PlayerPos)
 }
 void MoveDown(char Maze[21][21], _tagPPoint PlayerPos)
 {
-	if (PlayerPos->y + 1 < 21)//아래로이동가능한범위
+	if (PlayerPos->y + 1 < 21)//아래로 이동 가능한 범위
 	{
-		//벽, 폭탄인지확인
+		//벽, 폭탄인지 확인
 		if (Maze[PlayerPos->y + 1][PlayerPos->x] != '0' &&
 			Maze[PlayerPos->y + 1][PlayerPos->x] != '4')
 		{
@@ -106,9 +106,9 @@ void MoveDown(char Maze[21][21], _tagPPoint PlayerPos)
 }
 void MoveRight(char Maze[21][21], _tagPPoint PlayerPos)
 {
-	if (PlayerPos->x + 1 < 21)//오른쪽으로이동가능한경우
+	if (PlayerPos->x + 1 < 21)//오른쪽으로 이동 가능한 경우
 	{
-		//벽, 폭탄인지확인
+		//벽, 폭탄인지 확인
 		if (Maze[PlayerPos->y][PlayerPos->x + 1] != '0' &&
 			Maze[PlayerPos->y][PlayerPos->x + 1] != '4')
 		{
@@ -120,7 +120,7 @@ void MoveLeft(char Maze[21][21], _tagPPoint PlayerPos)
 {
 	if (PlayerPos->x - 1 < 21)
 	{
-		//벽, 폭탄인지확인
+		//벽, 폭탄인지 확인
 		if (Maze[PlayerPos->y][PlayerPos->x - 1] != '0' &&
 			Maze[PlayerPos->y][PlayerPos->x - 1] != '4')
 		{
@@ -136,96 +136,96 @@ void MovePlayer(char Maze[21][21], _tagPPoint PlayerPos, char cintput)
 	case'w':
 	case'W':
 		MoveUp(Maze, PlayerPos);
-		break
+		break;
 	case's':
 	case'S':
 		MoveDown(Maze, PlayerPos);
-		break
+		break;
 	case'a':
 	case'A':
 		MoveLeft(Maze, PlayerPos);
-		break
+		break;
 	case'd':
 	case'D':
 		MoveRight(Maze, PlayerPos);
-		break
+		break;
 	}
 }
 
 void CreateBomb(char Maze[21][21], const _tagPPoint Player, _tagPPoint BombArr, int* BombCnt, int* BombUsingCnt)
 {
-	if (*BombCnt == 5) //최대다섯개까지폭탄설치가능
-		return
+	if (*BombCnt == 5) //최대 다섯개까지 폭탄 설치 가능
+		return;
 
-		for (int i = 0; i < *BombCnt ++i) //중복위치에설치불가능
-		{
-			if (Player->x == BombArr[i].x && Player->y == BombArr[i].y)
-				return
-		}
-	BombArr[*BombCnt] = *Player //설치한폭탄의위치를배열로저장
-		++(*BombCnt);
+	for (int i = 0; i < *BombCnt; ++i) //중복위치에 설치 불가능
+	{
+		if (Player->x == BombArr[i].x && Player->y == BombArr[i].y)
+			return;
+	}
+	BombArr[*BombCnt] = *Player; //설치한 폭탄의 위치를 배열로 저장
+	++(*BombCnt);
 
-	Maze[Player->y][Player->x] = '4'
-		++(*BombUsingCnt);
+	Maze[Player->y][Player->x] = '4';
+	++(*BombUsingCnt);
 }
 
 void Fire(char Maze[21][21], _tagPPoint Player, _tagPPoint BombArr, int* BombCnt)
 {
-	for (int i = 0; i < *BombCnt ++i)
+	for (int i = 0; i < *BombCnt; ++i)
 	{
-		//터뜨린폭탄은없어짐
-		Maze[BombArr[i].y][BombArr[i].x] = '1'
+		//터뜨린 폭탄은 없어짐
+		Maze[BombArr[i].y][BombArr[i].x] = '1';
 
-			if (BombArr[i].y + 1 < 20)
+		if (BombArr[i].y + 1 < 20)
+		{
+			if (Maze[BombArr[i].y + 1][BombArr[i].x] == '0')//위의 벽이 깨짐
+				Maze[BombArr[i].y + 1][BombArr[i].x] = '1';
+
+			//플레이어가 폭탄에 맞으면 시작점으로 돌아감
+			if (Player->x == BombArr[i].x && Player->y == BombArr[i].y + 1)
 			{
-				if (Maze[BombArr[i].y + 1][BombArr[i].x] == '0')//위의벽이깨짐
-					Maze[BombArr[i].y + 1][BombArr[i].x] = '1'
-
-					//플레이어가폭탄에맞으면시작점으로돌아감
-					if (Player->x == BombArr[i].x && Player->y == BombArr[i].y + 1)
-					{
-						Player->x = 0;
-						Player->y = 0;
-					}
+				Player->x = 0;
+				Player->y = 0;
 			}
+		}
 		if (BombArr[i].y - 1 < 20)
 		{
-			if (Maze[BombArr[i].y - 1][BombArr[i].x] == '0')//아래벽이깨짐
-				Maze[BombArr[i].y - 1][BombArr[i].x] = '1'
+			if (Maze[BombArr[i].y - 1][BombArr[i].x] == '0')//아래 벽이 깨짐
+				Maze[BombArr[i].y - 1][BombArr[i].x] = '1';
 
-				if (Player->x == BombArr[i].x && Player->y == BombArr[i].y - 1)
-				{
-					Player->x = 0;
-					Player->y = 0;
-				}
+			if (Player->x == BombArr[i].x && Player->y == BombArr[i].y - 1)
+			{
+				Player->x = 0;
+				Player->y = 0;
+			}
 		}
 		if (BombArr[i].x - 1 >= 0)
 		{
-			if (Maze[BombArr[i].y][BombArr[i].x - 1] == '0')//왼쪽벽이깨짐
-				Maze[BombArr[i].y][BombArr[i].x - 1] = '1'
+			if (Maze[BombArr[i].y][BombArr[i].x - 1] == '0')//왼쪽 벽이 깨짐
+				Maze[BombArr[i].y][BombArr[i].x - 1] = '1';
 
-				if (Player->x == BombArr[i].x - 1 && Player->y == BombArr[i].y)
-				{
-					Player->x = 0;
-					Player->y = 0;
-				}
+			if (Player->x == BombArr[i].x - 1 && Player->y == BombArr[i].y)
+			{
+				Player->x = 0;
+				Player->y = 0;
+			}
 		}
 		if (BombArr[i].x + 1 < 20)
 		{
-			if (Maze[BombArr[i].y][BombArr[i].x + 1] == '0')//오른쪽벽이깨짐
-				Maze[BombArr[i].y][BombArr[i].x + 1] = '1'
-				if (Player->x == BombArr[i].x + 1 && Player->y == BombArr[i].y)
-				{
-					Player->x = 0;
-					Player->y = 0;
-				}
+			if (Maze[BombArr[i].y][BombArr[i].x + 1] == '0')//오른쪽 벽이 깨짐
+				Maze[BombArr[i].y][BombArr[i].x + 1] = '1';
+			if (Player->x == BombArr[i].x + 1 && Player->y == BombArr[i].y)
+			{
+				Player->x = 0;
+				Player->y = 0;
+			}
 		}
 	}
 	*BombCnt = 0;
 }
 int Winner(int PlayerCnt, int PlayerBombCnt[5], int minBomb, int winner)
 {
-	for (int i = 0; i < PlayerCnt i++)
+	for (int i = 0; i < PlayerCnt; i++)
 	{
 		if (PlayerBombCnt[i] < minBomb)
 		{
@@ -233,7 +233,7 @@ int Winner(int PlayerCnt, int PlayerBombCnt[5], int minBomb, int winner)
 			winner = i + 1;
 		}
 	}
-	return winner
+	return winner;
 }
 int main()
 {
@@ -248,10 +248,10 @@ int main()
 
 	int BombUsingCnt = 0;
 	int PlayerCnt = 0;
-	int minBomb = MAXBOMB
-		int winner = 0;
+	int minBomb = MAXBOMB;
+	int winner = 0;
 
-	printf("플레이어의수를입력하세요(최대5명까지가능합니다): ");
+	printf("플레이어의 수를 입력하세요(최대 5명까지 가능합니다): ");
 	scanf_s("%d", &PlayerCnt);
 	const int Player_Cnt = PlayerCnt;
 
@@ -267,23 +267,23 @@ int main()
 		while (1)
 		{
 			system("cls");
-			//미로출력
+			//미로 출력
 			Output(strMaze, &PlayerPos);
 
 			if (PlayerPos.x == EndPos.x && PlayerPos.y == EndPos.y)
 			{
 				printf("도착했습니다\n");
-				printf("사용하신폭탄의개수는%d 입니다.\n", BombUsingCnt);
+				printf("사용하신 폭탄의 개수는 %d 입니다.\n", BombUsingCnt);
 				PlayerBombCnt[i] = BombUsingCnt;
 				BombUsingCnt = 0;
 				Sleep(1000);
-				break
+				break;
 			}
-			printf("b : 폭탄설치, f : 폭탄터뜨리기\n");
+			printf("b : 폭탄 설치, f : 폭탄 터뜨리기\n");
 			printf("w : 위, s : 아래, a : 왼쪽, d : 오른쪽, q : 종료");
-			char cinput = _getch(); //키보드입력시바로반응
+			char cinput = _getch(); //키보드 입력시 바로 반응
 			if (cinput == 'q' || cinput == 'Q')
-				break
+				break;
 			else if (cinput == 'b' || cinput == 'B')
 			{
 				CreateBomb(strMaze, &PlayerPos, BombPos, &BombCnt, &BombUsingCnt);
@@ -300,7 +300,7 @@ int main()
 		if (i == PlayerCnt - 1)
 		{
 			winner = Winner(PlayerCnt, PlayerBombCnt, minBomb, winner);
-			printf("가장폭탄을적게사용한승자는%d번째플레이어입니다.", winner);
+			printf("가장 폭탄을 적게 사용한 승자는 %d번째 플레이어입니다.", winner);
 		}
 	}
 
